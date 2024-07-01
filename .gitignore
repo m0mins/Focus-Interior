@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__
+*.py[cod]
+*$py.class
+run.sh
+
+# Caches
+*.sqlite3
+*.db
+*.db-journal
+run.sh
+# Logs
+*.log
+.python-version
+# Temporary files
+*.swp
+*~
+
+# Directories
+postgres_data/
+media/
+#static
+venv/
+
+# Secret key
+*.secret_key
+
+# Configuration files
+*.ini
+
+# Development
+*.pyc
+
+# Ignore virtual environment
+
+
+# Ignore local settings
+local_settings.py
+
+# Ignore database configuration
+db.sqlite3
+
+# Ignore migration files
+migrations/
+#__init__.py
