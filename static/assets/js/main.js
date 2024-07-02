@@ -49,10 +49,12 @@
 
     // Date and time picker
     $('.date').datetimepicker({
-        format: 'L'
+        //format: 'L'
+        format: 'YYYY-MM-DD'
     });
     $('.time').datetimepicker({
-        format: 'LT'
+        //format: 'LT'
+        format: 'HH:mm'
     });
 
 

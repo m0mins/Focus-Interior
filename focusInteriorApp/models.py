@@ -130,10 +130,79 @@ class Appointment(models.Model):
     phone = models.CharField(max_length=50, null=True,blank=True)
     service = models.CharField(max_length=50,unique=True, choices=SERVICE_CHOICES, default='service3')
 
-    date = models.DateField(max_length=100, null=True,blank=True)
-    time = models.TimeField(max_length=100, null=True,blank=True)
+    date = models.CharField(max_length=100, null=True,blank=True)
+    time = models.CharField(max_length=100, null=True,blank=True)
 
     message = models.TextField( null=True,blank=True)
 
     def __str__(self):
         return self.service   
+
+class CompanyProfile(models.Model):
+    name = models.CharField(max_length=100, null=True,blank=True)
+    title = models.CharField(max_length=255, null=True,blank=True)
+    email = models.EmailField(unique=True, null=False, blank=False)
+    phone = models.CharField(max_length=100, null=True,blank=True)
+    year = models.IntegerField()
+    img1 = models.ImageField(upload_to='office_pic',null=True,blank=True)
+    img2 = models.ImageField(upload_to='office_pic',null=True,blank=True)
+    about = models.TextField(null=True,blank=True)
+
+    def __str__(self):
+        return self.name   
+
+class EmployeeProfile(models.Model):
+    name = models.CharField(max_length=100, null=True,blank=True)
+    designation = models.CharField(max_length=255, null=True,blank=True)
+    email = models.EmailField(unique=True, null=False, blank=False)
+    address = models.CharField(max_length=255, null=True,blank=True)
+    phone = models.CharField(max_length=100, null=True,blank=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='employee_pic',null=True,blank=True)
+    about = models.TextField(null=True,blank=True)
+    linkedIn = models.CharField(max_length=100, blank=True,null=True)
+    twitter = models.CharField(max_length=100, blank=True,null=True)
+    facebook = models.CharField(max_length=100, blank=True,null=True)
+    instagram = models.CharField(max_length=100, blank=True,null=True)
+
+    def __str__(self):
+        return self.name   
+    
+
+
+
+
+class OurWork(models.Model):
+    title=models.CharField(max_length=255, blank=True,null=True)
+    def __str__(self):
+        return self.title
+
+
+
+
+class Projects(models.Model):
+    name = models.CharField(max_length=100, null=True,blank=True)
+    title = models.CharField(max_length=255, null=True,blank=True)
+    short_description = models.CharField(max_length=255, null=True,blank=True)
+    address = models.CharField(max_length=255, null=True,blank=True)
+    phone = models.CharField(max_length=100, null=True,blank=True)
+    email = models.EmailField(unique=False, null=True, blank=True)
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(auto_now_add=True)
+
+    image = models.ImageField(upload_to='project_pic',null=True,blank=True)
+    about = models.TextField(null=True,blank=True)
+    linkedIn = models.CharField(max_length=100, blank=True,null=True)
+    twitter = models.CharField(max_length=100, blank=True,null=True)
+    facebook = models.CharField(max_length=100, blank=True,null=True)
+    instagram = models.CharField(max_length=100, blank=True,null=True)
+
+    def __str__(self):
+        return self.name   
+    
+class Project_Work(models.Model):
+    proj = models.ForeignKey(Projects, on_delete=models.CASCADE,related_name='project')
+    task = models.ForeignKey(OurWork, on_delete=models.CASCADE,related_name='task_list')
+
+    def __str__(self):
+        return f"{self.proj.name} - {self.task.title}"
